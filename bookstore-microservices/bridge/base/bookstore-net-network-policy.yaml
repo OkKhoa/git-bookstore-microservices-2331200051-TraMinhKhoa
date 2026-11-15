@@ -1,0 +1,18 @@
+#! bookstore-net-network-policy.yaml
+# Generated code, do not edit
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+    name: bookstore-net-network-policy
+    namespace: bookstore-microservices
+spec:
+    podSelector:
+        matchLabels:
+            com.docker.compose.network.bookstore-net: "true"
+    policyTypes:
+        - Ingress
+    ingress:
+        - from:
+            - podSelector:
+                matchLabels:
+                    com.docker.compose.network.bookstore-net: "true"

@@ -1,0 +1,40 @@
+#! user-db-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: user-db
+    namespace: bookstore-microservices
+    labels:
+        com.docker.compose.project: bookstore-microservices
+        com.docker.compose.service: user-db
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bookstore-microservices
+            com.docker.compose.service: user-db
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bookstore-microservices
+                com.docker.compose.service: user-db
+                com.docker.compose.network.bookstore-net: "true"
+        spec:
+            restartPolicy: unless-stopped
+            containers:
+                - name: user-db
+                  image: mongo:7
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: user-db-27017
+                      containerPort: 27017
+                  volumeMounts:
+                    - name: data-db
+                      mountPath: /data/db
+            volumes:
+                - name: data-db
+                  persistentVolumeClaim:
+                    claimName: user-db-user-data

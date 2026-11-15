@@ -1,0 +1,23 @@
+#! message-broker-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: message-broker-published
+    namespace: bookstore-microservices
+    labels:
+        com.docker.compose.project: bookstore-microservices
+        com.docker.compose.service: message-broker
+spec:
+    selector:
+        com.docker.compose.project: bookstore-microservices
+        com.docker.compose.service: message-broker
+    ports:
+        - name: message-br-5672
+          port: 5672
+          protocol: TCP
+          targetPort: message-br-5672
+        - name: message-b-15672
+          port: 15672
+          protocol: TCP
+          targetPort: message-b-15672

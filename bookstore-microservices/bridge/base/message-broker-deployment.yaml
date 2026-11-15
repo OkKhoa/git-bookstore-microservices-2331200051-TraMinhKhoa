@@ -1,0 +1,47 @@
+#! message-broker-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: message-broker
+    namespace: bookstore-microservices
+    labels:
+        com.docker.compose.project: bookstore-microservices
+        com.docker.compose.service: message-broker
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bookstore-microservices
+            com.docker.compose.service: message-broker
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bookstore-microservices
+                com.docker.compose.service: message-broker
+                com.docker.compose.network.bookstore-net: "true"
+        spec:
+            restartPolicy: unless-stopped
+            containers:
+                - name: message-broker
+                  image: rabbitmq:3-management
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: message-b-15691
+                      containerPort: 15691
+                    - name: message-b-15692
+                      containerPort: 15692
+                    - name: message-br-4369
+                      containerPort: 4369
+                    - name: message-br-5671
+                      containerPort: 5671
+                    - name: message-br-5672
+                      containerPort: 5672
+                    - name: message-b-25672
+                      containerPort: 25672
+                    - name: message-b-15671
+                      containerPort: 15671
+                    - name: message-b-15672
+                      containerPort: 15672

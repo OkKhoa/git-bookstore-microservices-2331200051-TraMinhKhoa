@@ -1,0 +1,43 @@
+#! product-service-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: product-service
+    namespace: bookstore-microservices
+    labels:
+        com.docker.compose.project: bookstore-microservices
+        com.docker.compose.service: product-service
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bookstore-microservices
+            com.docker.compose.service: product-service
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bookstore-microservices
+                com.docker.compose.service: product-service
+                com.docker.compose.network.bookstore-net: "true"
+        spec:
+            containers:
+                - name: product-service
+                  image: bookstore-microservices-product-service
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: PGDATABASE
+                      value: "products"
+                    - name: PGHOST
+                      value: "product-db"
+                    - name: PGPASSWORD
+                      value: "postgres"
+                    - name: PGPORT
+                      value: "5432"
+                    - name: PGUSER
+                      value: "postgres"
+                  ports:
+                    - name: product-se-8002
+                      containerPort: 8002

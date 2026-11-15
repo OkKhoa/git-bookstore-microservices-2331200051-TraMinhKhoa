@@ -1,0 +1,9 @@
+#! message-broker-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: message-broker-published
+    namespace: bookstore-microservices
+spec:
+    type: LoadBalancer

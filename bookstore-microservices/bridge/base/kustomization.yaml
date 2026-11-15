@@ -1,0 +1,30 @@
+#! kustomization.yaml
+# Generated code, do not edit
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+    - 0-bookstore-microservices-namespace.yaml
+    - api-gateway-deployment.yaml
+    - api-gateway-expose.yaml
+    - api-gateway-service.yaml
+    - bookstore-net-network-policy.yaml
+    - frontend-deployment.yaml
+    - frontend-expose.yaml
+    - message-broker-deployment.yaml
+    - message-broker-expose.yaml
+    - message-broker-service.yaml
+    - order-db-deployment.yaml
+    - order-db-expose.yaml
+    - order-db-order-data-persistentVolumeClaim.yaml
+    - order-service-deployment.yaml
+    - order-service-expose.yaml
+    - product-db-deployment.yaml
+    - product-db-expose.yaml
+    - product-db-product-data-persistentVolumeClaim.yaml
+    - product-service-deployment.yaml
+    - product-service-expose.yaml
+    - user-db-deployment.yaml
+    - user-db-expose.yaml
+    - user-db-user-data-persistentVolumeClaim.yaml
+    - user-service-deployment.yaml
+    - user-service-expose.yaml

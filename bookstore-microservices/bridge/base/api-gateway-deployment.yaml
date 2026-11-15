@@ -1,0 +1,32 @@
+#! api-gateway-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: api-gateway
+    namespace: bookstore-microservices
+    labels:
+        com.docker.compose.project: bookstore-microservices
+        com.docker.compose.service: api-gateway
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bookstore-microservices
+            com.docker.compose.service: api-gateway
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bookstore-microservices
+                com.docker.compose.service: api-gateway
+                com.docker.compose.network.bookstore-net: "true"
+        spec:
+            containers:
+                - name: api-gateway
+                  image: bookstore-microservices-api-gateway
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: api-gatewa-8000
+                      containerPort: 8000

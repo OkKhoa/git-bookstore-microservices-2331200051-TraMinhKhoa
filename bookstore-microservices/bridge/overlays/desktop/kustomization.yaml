@@ -1,0 +1,12 @@
+#! kustomization.yaml
+# Generated code, do not edit
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+    - ../../base
+patches:
+    - path: api-gateway-service.yaml
+    - path: message-broker-service.yaml
+    - path: order-db-order-data-persistentVolumeClaim.yaml
+    - path: product-db-product-data-persistentVolumeClaim.yaml
+    - path: user-db-user-data-persistentVolumeClaim.yaml
