@@ -65,6 +65,7 @@ app.post("/", async (req, res) => {
     };
 
     await publishMessage("order_events", message);
+    console.log("Published ORDER_CREATED event to RabbitMQ:", message);
 
     // 5. Return created order
     return res.status(201).json(newOrder);

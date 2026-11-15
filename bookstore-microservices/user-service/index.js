@@ -2,7 +2,6 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "./db.js";
-import db from "../product-service/db.js";
 
 const app = express();
 app.use(express.json());
@@ -33,10 +32,12 @@ app.post("/register", async (req, res) => {
     // TODO: Hash the password using bcrypt. `bcrypt.hash(password, 10)`
     // TODO: Create a new User instance with the username and hashed password.
     // TODO: Save the new user to the database.
-    const hashPassword = bcrypt.hash(password, 10);
-    const newUser = new User({ username: username, password: password });
+    const hashPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ username: username, password: hashPassword });
     await newUser.save();
-    res.status(201).json({ message: "User created", token: signToken(user) });
+    res
+      .status(201)
+      .json({ message: "User created", token: signToken(newUser) });
   } catch (err) {
     console.error("Register error:", err);
     res.status(500).json({ error: "Internal server error" });
